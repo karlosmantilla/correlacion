@@ -163,7 +163,7 @@ Ahora, hagamos un Gráfico de Dispersión:
 +   geom_smooth(method=lm)
 ```
 
-<img src="images/ggdispersion.png" width="85%">
+<img src="images/ggdispersion.png" width="85%" align=center>
 
 
 #### Pregunta para los estudiantes: ¿Qué interpretación podemos darle a este gráfico?
@@ -171,11 +171,13 @@ Ahora, hagamos un Gráfico de Dispersión:
 Boxplot:
 
 ```{r}
-ggplot(datos1,aes(y = gdpw2, x = courts))  +
-geom_boxplot()+ labs(x="Courts",y="GDP")+
-  stat_summary(fun.y=mean, colour="red", geom="point", 
-               shape=20, size=3) 
+> win.graph(6,10,10)
+> ggplot(datos1,aes(y = gdpw2, x = courts))  +
++ geom_boxplot()+ labs(x="Courts",y="GDP")+
++   stat_summary(fun.y=mean, colour="red", geom="point", 
++                shape=20, size=3)
 ```
+<img src="images/boxplot1.png" width="85%" align=center>
 
 Otros factores
 
