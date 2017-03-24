@@ -50,7 +50,7 @@ Ahora grafiquemos el conjunto de datos para observar su comportamiento:
 > plot(datos)
 ```
 
-![Plot Datos](images/plotdatos.png)
+<img src="images/plotdatos.png" width="75%">
 
 Y miremos la correlación
 
