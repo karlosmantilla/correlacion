@@ -138,10 +138,11 @@ Pidamos, nuevamente, un resumen numérico:
 #### Pregunta para los estudiantes: ¿Cuáles variables graficamos mediante una diagrama de dispersion y cuáles mediante cajas?
 
 ```{r}
-with(datos1,plot(barb2,gdpw2))
-with(datos1,plot(courts,gdpw2))
-with(datos1,plot(prsexp2,gdpw2))
-with(datos1,plot(prscorr2,gdpw2))
+> par(mfrow=c(2,2))
+> with(datos1,plot(barb2,gdpw2,main="Dispersión"))
+> with(datos1,plot(courts,gdpw2,main="Boxplot courts"))
+> with(datos1,plot(prsexp2,gdpw2,main="Boxplot prsexp2"))
+> with(datos1,plot(prscorr2,gdpw2,main="Boxplot prscorr2"))
 ```
 ![BoxPlots Datos](images/boxplots1.png)
 
