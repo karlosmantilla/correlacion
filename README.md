@@ -50,7 +50,7 @@ Ahora grafiquemos el conjunto de datos para observar su comportamiento:
 > plot(datos)
 ```
 
-<img src="images/plotdatos.png" width="75%">
+<img src="images/plotdatos.png" width="85%">
 
 Y miremos la correlación
 
@@ -144,7 +144,7 @@ Pidamos, nuevamente, un resumen numérico:
 > with(datos1,plot(prsexp2,gdpw2,main="Boxplot prsexp2"))
 > with(datos1,plot(prscorr2,gdpw2,main="Boxplot prscorr2"))
 ```
-![BoxPlots Datos](images/boxplots1.png)
+<img src="images/boxplots1.png" width="85%">
 
 ### Vamos, ahora, a hacer gráficas más bonitas. Primero, instalemos librerías
 
@@ -163,7 +163,8 @@ Ahora, hagamos un Gráfico de Dispersión:
 +   geom_smooth(method=lm)
 ```
 
-![GGplotDispersion Datos](images/ggdispersion.png)
+<img src="images/ggdispersion.png" width="85%">
+
 
 #### Pregunta para los estudiantes: ¿Qué interpretación podemos darle a este gráfico?
 
