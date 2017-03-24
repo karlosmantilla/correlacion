@@ -109,10 +109,17 @@ Bolivia         0 -2.4614400       0        0  8.583543
 Convirtamos en factores las variables que lo son:
 
 ```{r}
-datos1$courts<-factor(datos1$courts,labels=c("No","Si"))
-head(datos1)
-datos1$prsexp2<-factor(datos1$prsexp2)
-datos1$prscorr2<-factor(datos1$prscorr2)
+> datos1$courts<-factor(datos1$courts,labels=c("No","Si"))
+> head(datos1)
+           courts      barb2 prsexp2 prscorr2     gdpw2
+Argentina      No -0.7207754       1        3  9.690170
+Australia      Si -6.9077550       5        4 10.304840
+Austria        Si -4.9103370       5        4 10.100940
+Bangladesh     No  0.7759748       1        0  8.379768
+Belgium        Si -4.6173440       5        4 10.250120
+Bolivia        No -2.4614400       0        0  8.583543
+> datos1$prsexp2<-factor(datos1$prsexp2)
+> datos1$prscorr2<-factor(datos1$prscorr2)
 ```
 
 Pidamos, nuevamente, un resumen numérico:
