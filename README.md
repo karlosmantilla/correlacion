@@ -125,7 +125,14 @@ Bolivia        No -2.4614400       0        0  8.583543
 Pidamos, nuevamente, un resumen numérico:
 
 ```{r}
-summary(datos1)
+> summary(datos1)
+ courts      barb2        prsexp2 prscorr2     gdpw2       
+ No:34   Min.   :-6.908   0: 2    0: 5     Min.   : 7.030  
+ Si:28   1st Qu.:-4.895   1: 6    1:11     1st Qu.: 8.381  
+         Median :-2.353   2: 7    2:18     Median : 9.185  
+         Mean   :-2.926   3:19    3:11     Mean   : 9.042  
+         3rd Qu.:-1.301   4:14    4: 8     3rd Qu.: 9.889  
+         Max.   : 2.337   5:14    5: 9     Max.   :10.410
 ```
 
 #### Pregunta para los estudiantes: ¿Cuáles variables graficamos mediante una diagrama de dispersion y cuáles mediante cajas?
@@ -136,6 +143,7 @@ with(datos1,plot(courts,gdpw2))
 with(datos1,plot(prsexp2,gdpw2))
 with(datos1,plot(prscorr2,gdpw2))
 ```
+![BoxPlots Datos](images/boxplots1.png)
 
 ### Vamos, ahora, a hacer gráficas más bonitas. Primero, instalemos librerías
 
