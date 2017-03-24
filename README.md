@@ -66,7 +66,15 @@ Como se observa, hay un par de variables que no son numéricas. Vamos, entonces,
 Para ello solicitamos un resumen numérico básico:
 
 ```{r}
-summary(datos)
+> summary(datos)
+          X            country       courts           barb2           prsexp2         prscorr2         gdpw2       
+ Argentina : 1   Argentina : 1   Min.   :0.0000   Min.   :-6.908   Min.   :0.000   Min.   :0.000   Min.   : 7.030  
+ Australia : 1   Australia : 1   1st Qu.:0.0000   1st Qu.:-4.895   1st Qu.:3.000   1st Qu.:1.250   1st Qu.: 8.381  
+ Austria   : 1   Austria   : 1   Median :0.0000   Median :-2.353   Median :3.000   Median :2.000   Median : 9.185  
+ Bangladesh: 1   Bangladesh: 1   Mean   :0.4516   Mean   :-2.926   Mean   :3.274   Mean   :2.532   Mean   : 9.042  
+ Belgium   : 1   Belgium   : 1   3rd Qu.:1.0000   3rd Qu.:-1.301   3rd Qu.:4.000   3rd Qu.:4.000   3rd Qu.: 9.889  
+ Bolivia   : 1   Bolivia   : 1   Max.   :1.0000   Max.   : 2.337   Max.   :5.000   Max.   :5.000   Max.   :10.410  
+ (Other)   :56   (Other)   :56 
 ```
 
 Vemos que "X" y "country" son la misma variable; además, "country" es un factor que no se repite. Por lo tanto, podemos excluirlas y emplearlas para identificar las observaciones:
