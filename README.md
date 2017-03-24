@@ -47,13 +47,16 @@ Para consultar la información asociada a la base de datos y las variables se pu
 Ahora grafiquemos el conjunto de datos para observar su comportamiento:
 
 ```{r}
-plot(datos)
+> plot(datos)
 ```
+
+![Plot Datos](~images/plotdatos.png)
 
 Y miremos la correlación
 
 ```{r}
-cor(datos)
+> cor(datos)
+Error in cor(datos) : 'x' must be numeric
 ```
 
 #### Pregunta para los estudiantes: ¿Qué significa ese error que reporta R?
