@@ -149,19 +149,21 @@ Pidamos, nuevamente, un resumen numérico:
 ### Vamos, ahora, a hacer gráficas más bonitas. Primero, instalemos librerías
 
 ```{r}
-library(ggplot2) # Si no está instalado: install.packages("ggplot2")
-library(reshape2) # Si no está instalado: install.packages("reshape2")
-library(GGally) # Si no está instalado: install.packages("GGally")
-library(ggrepel) # Si no está instalado: install.packages("ggrepel")
+> library(ggplot2) # Si no está instalado: install.packages("ggplot2")
+> library(reshape2) # Si no está instalado: install.packages("reshape2")
+> library(GGally) # Si no está instalado: install.packages("GGally")
+> library(ggrepel) # Si no está instalado: install.packages("ggrepel")
 ```
 
 Ahora, hagamos un Gráfico de Dispersión:
 
 ```{r}
-ggplot(datos1, aes(x=barb2, y=gdpw2)) +  geom_point(size=2,col="darkgreen")+ 
-  geom_text_repel(label=rownames(datos1))+  geom_density_2d()+
-  geom_smooth(method=lm)
+> ggplot(datos1, aes(x=barb2, y=gdpw2)) +  geom_point(size=2,col="darkgreen")+ 
++   geom_text_repel(label=rownames(datos1))+  geom_density_2d()+
++   geom_smooth(method=lm)
 ```
+
+![GGplotDispersion Datos](images/ggdispersion.png)
 
 #### Pregunta para los estudiantes: ¿Qué interpretación podemos darle a este gráfico?
 
@@ -174,7 +176,7 @@ geom_boxplot()+ labs(x="Courts",y="GDP")+
                shape=20, size=3) 
 ```
 
-Otros factore
+Otros factores
 
 ```{r}
 ggplot(datos1,aes(y = gdpw2, x = prsexp2))  +
