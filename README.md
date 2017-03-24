@@ -25,7 +25,7 @@ Para realizar el análisis de correlación vamos a emplear los siguientes ejempl
 ### Importación de datos
 
 
-Vamos a importar los datos directamente desde internet. Es, quizás, uno de los casos más sencillos pero debe tenerse en cuenta la extensión que se está empleando. Para el ejemplo es CSV  (del inglés comma-separated values), luego trabajaremos en exploración en bases html y xml.
+Vamos a importar los datos directamente desde internet. Es, quizás, uno de los casos más sencillos pero debe tenerse en cuenta la extensión que se está empleando. Para el ejemplo es CSV  (del inglés comma-separated values), luego trabajaremos en exploración en tablas html y xml.
 
 
 
@@ -35,7 +35,7 @@ Llamaremos "datos" a la base con la que trabajaremos, con esto, la sintaxis es:
 
 ```{r}
 
-datos<-read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/Zelig/PErisk.csv")
+> datos<-read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/Zelig/PErisk.csv")
 
 ```
 
@@ -80,21 +80,28 @@ Para ello solicitamos un resumen numérico básico:
 Vemos que "X" y "country" son la misma variable; además, "country" es un factor que no se repite. Por lo tanto, podemos excluirlas y emplearlas para identificar las observaciones:
 
 ```{r}
-datos1<-datos[,-1] # quitamos "X" que es la 1ra Columna de la matriz
-                   # Recordemos que el ordenamiento es matricial, entonces
-                   # las cifras dentro del corchete se leen: [fila,columna]
+> datos1<-datos[,-1] # quitamos "X" que es la 1ra Columna de la matriz
+>                    # Recordemos que el ordenamiento es matricial, entonces
+>                    # las cifras dentro del corchete se leen: [fila,columna]
 ```
 
 Ahora, usemos "country" para identificar las observaciones y, a la ves la eliminamos de la base como variable:
 
 ```{r}
-row.names(datos1)<-datos1[,1]; datos1<-datos1[,-1]
+> row.names(datos1)<-datos1[,1]; datos1<-datos1[,-1]
 ```
 
 Visualicemos el encabezado de los datos
 
 ```{r}
-head(datos1)
+> head(datos1)
+           courts      barb2 prsexp2 prscorr2     gdpw2
+Argentina       0 -0.7207754       1        3  9.690170
+Australia       1 -6.9077550       5        4 10.304840
+Austria         1 -4.9103370       5        4 10.100940
+Bangladesh      0  0.7759748       1        0  8.379768
+Belgium         1 -4.6173440       5        4 10.250120
+Bolivia         0 -2.4614400       0        0  8.583543
 ```
 
 #### Pregunta para los estudiantes: ¿De las variables observadas, cuáles son Factores y cuáles Covariables?
