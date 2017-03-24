@@ -163,7 +163,7 @@ Ahora, hagamos un Gráfico de Dispersión:
 +   geom_smooth(method=lm)
 ```
 
-<img src="images/ggdispersion.png" width="85%" align=center>
+<img src="images/ggdispersion.png" width="85%">
 
 
 #### Pregunta para los estudiantes: ¿Qué interpretación podemos darle a este gráfico?
@@ -177,7 +177,7 @@ Boxplot:
 +   stat_summary(fun.y=mean, colour="red", geom="point", 
 +                shape=20, size=3)
 ```
-<img src="images/boxplot1.png" width="85%" align=center>
+<img src="images/boxplot1.png">
 
 Otros factores
 
