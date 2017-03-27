@@ -193,6 +193,8 @@ geom_boxplot()+ labs(x="Courts",y="GDP")+
                shape=20, size=3) 
 ```
 
+<img src="images/boxplot2.png">
+
 ## Correlación
 
 Gráficamente:
