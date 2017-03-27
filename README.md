@@ -182,15 +182,14 @@ Boxplot:
 Otros factores
 
 ```{r}
-ggplot(datos1,aes(y = gdpw2, x = prsexp2))  +
-geom_boxplot()+ labs(x="Courts",y="GDP")+
-  stat_summary(fun.y=mean, colour="red", geom="point", 
-               shape=20, size=3) 
-
-ggplot(datos1,aes(y = gdpw2, x = prscorr2))  +
-geom_boxplot()+ labs(x="Courts",y="GDP")+
-  stat_summary(fun.y=mean, colour="red", geom="point", 
-               shape=20, size=3) 
+> ggplot(datos1,aes(y = gdpw2, x = prsexp2))  +
++ geom_boxplot()+ labs(x="Courts",y="GDP")+
++   stat_summary(fun.y=mean, colour="red", geom="point", 
++                shape=20, size=3) 
+> ggplot(datos1,aes(y = gdpw2, x = prscorr2))  +
++ geom_boxplot()+ labs(x="Courts",y="GDP")+
++   stat_summary(fun.y=mean, colour="red", geom="point", 
++                shape=20, size=3) 
 ```
 
 <img src="images/boxplot2.png">
@@ -200,12 +199,14 @@ geom_boxplot()+ labs(x="Courts",y="GDP")+
 Gráficamente:
 
 ```{r}
-ggcorr(datos[,-c(1:2)], palette = "RdBu", label = TRUE)
+> ggcorr(datos[,-c(1:2)], palette = "RdBu", label = TRUE)
 ```
+<img src="images/correlacion.png">
 
 Y el Coef. Correlación
 ```{r}
-cor(datos1)
+> cor(datos1)
+Error in cor(datos1) : 'x' must be numeric
 ```
 
 #### Pregunta para los estudiantes: ¿Por qué se presenta este error?
@@ -213,7 +214,13 @@ cor(datos1)
 Entonces, empleemos la otra base de datos donde están los valores numéricos, suprimiendo las dos variables de factor:
 
 ```{r}
-cor(datos[,-c(1:2)])
+> cor(datos[,-c(1:2)])
+             courts      barb2    prsexp2   prscorr2      gdpw2
+courts    1.0000000 -0.5413491  0.6998145  0.6986977  0.6127991
+barb2    -0.5413491  1.0000000 -0.6757255 -0.6568278 -0.5409640
+prsexp2   0.6998145 -0.6757255  1.0000000  0.7095904  0.4804434
+prscorr2  0.6986977 -0.6568278  0.7095904  1.0000000  0.7249548
+gdpw2     0.6127991 -0.5409640  0.4804434  0.7249548  1.0000000
 ```
 
 #### Pregunta para los estudiantes: ¿Cómo interpretamos eso valores?
@@ -222,8 +229,41 @@ cor(datos[,-c(1:2)])
 Veamos la correlación parcial:
 
 ```{r}
-library(ppcor) # Si no está instalada se usa: install.packages("ppcor")
-pcor(datos[,-c(1:2)])
+> library(ppcor) # Si no está instalada se usa: install.packages("ppcor")
+Loading required package: MASS
+> pcor(datos[,-c(1:2)])
+$estimate
+             courts       barb2    prsexp2   prscorr2      gdpw2
+courts   1.00000000  0.05545558  0.4175334  0.1878734  0.2726589
+barb2    0.05545558  1.00000000 -0.3928600 -0.1877351 -0.1748152
+prsexp2  0.41753344 -0.39286000  1.0000000  0.3352065 -0.2281803
+prscorr2 0.18787342 -0.18773508  0.3352065  1.0000000  0.4899156
+gdpw2    0.27265894 -0.17481515 -0.2281803  0.4899156  1.0000000
+
+$p.value
+             courts       barb2     prsexp2     prscorr2        gdpw2
+courts   0.00000000 0.676554273 0.001001180 0.1541773139 0.0366818091
+barb2    0.67655427 0.000000000 0.002085165 0.1544863970 0.1854120617
+prsexp2  0.00100118 0.002085165 0.000000000 0.0094525874 0.0821760994
+prscorr2 0.15417731 0.154486397 0.009452587 0.0000000000 0.0000820391
+gdpw2    0.03668181 0.185412062 0.082176099 0.0000820391 0.0000000000
+
+$statistic
+            courts      barb2   prsexp2  prscorr2     gdpw2
+courts   0.0000000  0.4193257  3.469178  1.444128  2.139598
+barb2    0.4193257  0.0000000 -3.225352 -1.443026 -1.340467
+prsexp2  3.4691776 -3.2253518  0.000000  2.686162 -1.769402
+prscorr2 1.4441284 -1.4430262  2.686162  0.000000  4.242842
+gdpw2    2.1395976 -1.3404669 -1.769402  4.242842  0.000000
+
+$n
+[1] 62
+
+$gp
+[1] 3
+
+$method
+[1] "pearson"
 ```
 
 #### Pregunta para los estudiantes: ¿Cómo interpretamos eso valores?
@@ -231,54 +271,62 @@ pcor(datos[,-c(1:2)])
 Veamos ahora la correlación múltiple:
 
 ```{r}
-# Necesitamos crear la función:
-
-#coeficiente
-# Función para calcular el Coeficiente de correlacion multiple.
-rho.mult<-function(datos)
-  # datos: matriz con las variables del problema.
-  # La primera columna debe ser la variable respuesta.
-  # Las restantes p-1 columnas son las variables explicativas.
-{
-  matriz<-var(datos)
-  # calculo
-  n<-nrow(datos)
-  p<-ncol(matriz)
-  sxx<-matriz[2:p,2:p]
-  syx<-matrix(matriz[1,2:p],nrow=1)
-  sxy<-t(syx)
-  #coeficiente
-  rho.mult<-sqrt(syx%*%solve(sxx)%*%sxy)/sqrt(matriz[1,1])
-  cat("\n Coeficiente de correlación multile: ",rho.mult,"\n")
-  #estadistico
-  if(abs(rho.mult)==1)
-    stop("Imposible resolver contraste.
-         Coeficiente de correlación múltiple igual a 1", call. = FALSE)
-  else{
-    est<-((n-(p-1)-1)*rho.mult)/((p-1)*(1-rho.mult^2))
-    #grafico
-    par(mfrow=c(1,1))
-    x<-seq(0,qf(0.999,p-1,n-(p-1)-1),length=500)
-    plot(x,df(x,p-1,n-(p-1)-1),type="l",ylab="densidad",
-         main="Contraste Correlación Múltiple")
-    abline(v=qf(0.975,p-1,n-(p-1)-1),col="red")
-    abline(v=qf(0.025,p-1,n-(p-1)-1),col="red")
-    abline(v=est,col="blue")
-    abline(h=0)
-    legend(qf(0.98,p-1,n-(p-1)-1),pf((p+3)/(n-p),p-1,n-(p-1)-1),
-           c("Estadístico","Región Crítica"),lty=rep(1,2),
-           col=c("blue","red"),bty="n")
-    cat("\n Estadístico de contraste: ",round(est,3),"\n")
-    cat("\n p-valor: ",round(2*(1-pf(est,p-1,n-(p-1)-1)),3),"\n\n")}
-  return(invisible())
-}
+> # Necesitamos crear la función:
+> 
+> #coeficiente
+> # Función para calcular el Coeficiente de correlacion multiple.
+> rho.mult<-function(datos)
++   # datos: matriz con las variables del problema.
++   # La primera columna debe ser la variable respuesta.
++   # Las restantes p-1 columnas son las variables explicativas.
++ {
++   matriz<-var(datos)
++   # calculo
++   n<-nrow(datos)
++   p<-ncol(matriz)
++   sxx<-matriz[2:p,2:p]
++   syx<-matrix(matriz[1,2:p],nrow=1)
++   sxy<-t(syx)
++   #coeficiente
++   rho.mult<-sqrt(syx%*%solve(sxx)%*%sxy)/sqrt(matriz[1,1])
++   cat("\n Coeficiente de correlación multile: ",rho.mult,"\n")
++   #estadistico
++   if(abs(rho.mult)==1)
++     stop("Imposible resolver contraste.
++          Coeficiente de correlación múltiple igual a 1", call. = FALSE)
++   else{
++     est<-((n-(p-1)-1)*rho.mult)/((p-1)*(1-rho.mult^2))
++     #grafico
++     par(mfrow=c(1,1))
++     x<-seq(0,qf(0.999,p-1,n-(p-1)-1),length=500)
++     plot(x,df(x,p-1,n-(p-1)-1),type="l",ylab="densidad",
++          main="Contraste Correlación Múltiple")
++     abline(v=qf(0.975,p-1,n-(p-1)-1),col="red")
++     abline(v=qf(0.025,p-1,n-(p-1)-1),col="red")
++     abline(v=est,col="blue")
++     abline(h=0)
++     legend(qf(0.98,p-1,n-(p-1)-1),pf((p+3)/(n-p),p-1,n-(p-1)-1),
++            c("Estadístico","Región Crítica"),lty=rep(1,2),
++            col=c("blue","red"),bty="n")
++     cat("\n Estadístico de contraste: ",round(est,3),"\n")
++     cat("\n p-valor: ",round(2*(1-pf(est,p-1,n-(p-1)-1)),3),"\n\n")}
++   return(invisible())
++ }
 ```
 
 Ahora, sí lo podemos calcular:
 
 ```{r}
-rho.mult(datos[,-c(1:2)])
+> rho.mult(datos[,-c(1:2)])
+
+ Coeficiente de correlación multile:  0.7770876 
+
+ Estadístico de contraste:  27.954 
+
+ p-valor:  0
 ```
+
+<img src="images/rhomult.png">
 
 #### Pregunta para los estudiantes: ¿Por qué ése resultado? ¿Qué significa?
 
